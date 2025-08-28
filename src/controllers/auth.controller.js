@@ -37,13 +37,15 @@ const postLogin = async (req, res) => {
   res.status(200).json({
     status: 200,
     message: 'User login successfully.',
-    user: {
-      id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email
-    },
-    token
+    data: {
+      user: {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email
+      },
+      token
+    }
   })
 };
 
