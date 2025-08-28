@@ -2,6 +2,7 @@ const express = require('express');
 const { PORT } = require('./config.js');
 const routerAuth = require('./routes/auth.route.js');
 const routerProducts = require('./routes/product.route.js');
+const routerUsers = require('./routes/user.route.js');
 const authenticateToken = require('./middleware/authenticateToken.js');
 
 const app = express();
@@ -13,6 +14,7 @@ app.get('/test', (req, res) => {
 });
 
 app.use('/api', routerAuth);
+app.use('/api', routerUsers);
 
 app.use(authenticateToken);
 app.use('/api', routerProducts);
