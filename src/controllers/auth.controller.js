@@ -28,11 +28,11 @@ const postLogin = async (req, res) => {
     }
   } else {
     return res.status(401).json({
-      message: 'Invalid credentials'
+      message: 'There is no user with that email.'
     })
   }
 
-  const token = jwt.sign({ email: user.email }, JWT_SECRET, { expiresIn: '1h' });
+  const token = jwt.sign({ email: user.email }, JWT_SECRET, { expiresIn: '10s' });
 
   res.status(200).json({
     status: 200,

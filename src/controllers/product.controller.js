@@ -41,14 +41,20 @@ const getProductById = async (req, res) => {
 const postProduct = async (req, res) => {
   try {
     const { name, price, description, size, image, stock } = req.body;
+    const trimmedName = name.trim();
+    let cleanedImage = image;
+
+    if (image.includes('data:')) {
+      cleanedImage = image.split(' ')[0].trim();
+    }
 
     const createProduct = await Product.create(
       {
-        name,
+        name: trimmedName,
         price,
         description,
         size,
-        image,
+        image: cleanedImage,
         stock
       }
     );
@@ -71,14 +77,20 @@ const putProduct = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, price, description, size, image, stock } = req.body;
+    const trimmedName = name.trim();
+    let cleanedImage = image;
+
+    if (image.includes('data:')) {
+      cleanedImage = image.split(' ')[0].trim();
+    }
 
     const updateProduct = await Product.update(
       {
-        name,
+        name: trimmedName,
         price,
         description,
         size,
-        image,
+        image: cleanedImage,
         stock
       },
       {

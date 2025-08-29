@@ -5,11 +5,11 @@ const saltRounds = 10;
 
 const postUser = async (req, res) => {
   try {
-    const { firstName, lastName, email, password, confirmPassword } = req.body;
+    const { firstName, lastName, email, password, confirmPassword, terms } = req.body;
 
-    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+    if (!firstName || !lastName || !email || !password || !confirmPassword || !terms) {
       return res.status(400).json({
-        message: 'All fields are required.'
+        message: 'All fields are required and you must accept the terms.'
       });
     };
 
@@ -33,9 +33,9 @@ const postUser = async (req, res) => {
       message: 'User created successfully.',
       data: {
         user: {
-          firstName,
-          lastName,
-          email
+          firstName: createUser.firstName,
+          lastName: createUser.lastName,
+          email: createUser.email
         }
       }
     });
