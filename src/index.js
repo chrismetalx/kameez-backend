@@ -1,5 +1,5 @@
 const express = require('express');
-const { PORT } = require('./config.js');
+const { PORT, VITE_APP_API_URL } = require('./config.js');
 const routerAuth = require('./routes/auth.route.js');
 const routerProducts = require('./routes/product.route.js');
 const routerUsers = require('./routes/user.route.js');
@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json({ limit: '50mb' }));
 
 app.use(cors({
-  origin: 'https://kameez-vue-crud.netlify.app'
+  origin: VITE_APP_API_URL
 }));
 
 app.get('/test', (req, res) => {

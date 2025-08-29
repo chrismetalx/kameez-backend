@@ -8,6 +8,7 @@ const DB_PORT = process.env.DB_PORT || 3306
 const JWT_SECRET = process.env.JWT_SECRET
 const DB_PASSWORD = process.env.DB_PASSWORD
 const NODE_ENV = process.env.NODE_ENV
+const VITE_APP_API_URL = process.env.VITE_APP_API_URL
 
 module.exports = {
   PORT: PORT,
@@ -17,5 +18,6 @@ module.exports = {
   DB_PORT: DB_PORT,
   JWT_SECRET: JWT_SECRET,
   DB_PASSWORD: DB_PASSWORD,
-  NODE_ENV: NODE_ENV
+  NODE_ENV: NODE_ENV,
+  VITE_APP_API_URL: VITE_APP_API_URL
 };
