@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json({ limit: '50mb' }));
 
 app.use(cors({
-  origin: 'https://kameez-vue-crud.netlify.app/'
+  origin: 'https://kameez-vue-crud.netlify.app'
 }));
 
 app.get('/test', (req, res) => {
