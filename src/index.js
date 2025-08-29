@@ -4,10 +4,15 @@ const routerAuth = require('./routes/auth.route.js');
 const routerProducts = require('./routes/product.route.js');
 const routerUsers = require('./routes/user.route.js');
 const authenticateToken = require('./middleware/authenticateToken.js');
+const cors = require('cors');
 
 const app = express();
 
 app.use(express.json({ limit: '50mb' }));
+
+app.use(cors({
+  origin: 'https://kameez-vue-crud.netlify.app/'
+}));
 
 app.get('/test', (req, res) => {
   res.status(200).send('I am online.');
