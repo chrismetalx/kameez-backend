@@ -20,13 +20,14 @@ const getProductById = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const product = await Product.findOne(
-      {
-        where: {
-          id
-        }
-      }
-    );
+    const product = await Product.findOne({ where: { id } });
+
+    if (!product) {
+      return res.status(404).json({
+        status: 404,
+        message: `Product with ID ${id} not found.`
+      });
+    }
 
     res.status(200).json({
       status: 200,
@@ -43,6 +44,13 @@ const postProduct = async (req, res) => {
     const { name, price, description, size, image, stock } = req.body;
     const trimmedName = name.trim();
     let cleanedImage = image;
+
+    if (!name || !price || !description || !size || !image) {
+      return res.status(404).json({
+        status: 404,
+        message: `All fields are required.`
+      });
+    }
 
     if (image.includes('data:')) {
       cleanedImage = image.split(' ')[0].trim();
@@ -79,6 +87,22 @@ const putProduct = async (req, res) => {
     const { name, price, description, size, image, stock } = req.body;
     const trimmedName = name.trim();
     let cleanedImage = image;
+
+    const product = await Product.findOne({ where: { id } });
+
+    if (!product) {
+      return res.status(404).json({
+        status: 404,
+        message: `Product with ID ${id} not found.`
+      });
+    }
+
+    if (!name || !price || !description || !size) {
+      return res.status(404).json({
+        status: 404,
+        message: `All fields are required.`
+      });
+    }
 
     if (image.includes('data:')) {
       cleanedImage = image.split(' ')[0].trim();
@@ -117,6 +141,15 @@ const putProduct = async (req, res) => {
 const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
+
+    const product = await Product.findOne({ where: { id } });
+
+    if (!product) {
+      return res.status(404).json({
+        status: 404,
+        message: `Product with ID ${id} not found.`
+      });
+    }
 
     const destroyProduct = await Product.destroy(
       {

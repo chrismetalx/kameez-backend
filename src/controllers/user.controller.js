@@ -5,17 +5,11 @@ const saltRounds = 10;
 
 const postUser = async (req, res) => {
   try {
-    const { firstName, lastName, email, password, confirmPassword, terms } = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
-    if (!firstName || !lastName || !email || !password || !confirmPassword || !terms) {
+    if (!firstName || !lastName || !email || !password) {
       return res.status(400).json({
-        message: 'All fields are required and you must accept the terms.'
-      });
-    };
-
-    if (password !== confirmPassword) {
-      return res.status(400).json({
-        message: 'The password and confirm password do not match.'
+        message: 'All fields are required.'
       });
     };
 
@@ -56,12 +50,6 @@ const patchUserPassword = async (req, res) => {
     if (!email || !password || !confirmPassword) {
       return res.status(400).json({
         message: 'All fields are required.'
-      });
-    };
-
-    if (password !== confirmPassword) {
-      return res.status(400).json({
-        message: 'The password and confirm password do not match.'
       });
     };
 
