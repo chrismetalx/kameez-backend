@@ -15,7 +15,7 @@ app.use(cors({
 }));
 
 app.get('/test', (req, res) => {
-  res.status(200).send('I am online.');
+  res.status(200).send('I am online');
 });
 
 app.use('/api', routerAuth);
